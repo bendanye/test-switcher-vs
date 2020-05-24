@@ -25,38 +25,88 @@ function activate(context) {
 
 		//console.log(vscode.window.activeTextEditor.document.uri.fsPath);
 
+		const fileSuffixes = ['.unit.test'];
+
 		const currentOpenFileName = vscode.window.activeTextEditor.document.uri.fsPath.replace(vscode.workspace.rootPath, '');
 
-		console.log(currentOpenFileName);
+		//console.log(currentOpenFileName);
 
-		let fileToSwitch = null; 
+		let fileToSwitch = null;
 
 		if (currentOpenFileName.startsWith("\\src\\")) {
-			fileToSwitch = 'test/calculator.unit.test.js';
+
+			let fileNameToSearch = currentOpenFileName.replace("\\src\\", '').replace('.js', '');
+			console.log(fileNameToSearch);
+
+			fileNameToSearch = fileNameToSearch + '{,' + fileSuffixes.join(',') + '}';
+
+			searchFiles('**/test/', fileNameToSearch);
+			
+			const findResult = vscode.workspace.findFiles('**/test/' + fileNameToSearch + '{,' + fileSuffixes.join(',') + '}.js', '**​/node_modules/**', 100);
+			return findResult.then(uris => {
+				console.log(uris);
+				if (!uris) {
+					return;
+				}
+				uris.forEach(uri => {
+					console.log(uri.fsPath);
+					//self.matchingFiles.push(uri.fsPath);
+				});
+				
+			});
 		}
 
 		else {
-			fileToSwitch = 'src/calculator.js';
+
+			let fileNameToSearch = currentOpenFileName.replace("\\test\\", '').replace('.js', '');
+			for(let i in fileSuffixes) {
+				fileNameToSearch = fileNameToSearch.replace(fileSuffixes[i], '');
+			}
+
+			console.log(fileNameToSearch);
+			searchFiles('**/src/', fileNameToSearch);
+			
 		}
 
-		var filePath = path.join(vscode.workspace.rootPath, fileToSwitch);
-		var openPath = vscode.Uri.file(filePath);
-		vscode.workspace.openTextDocument(openPath).then(doc => {
-			vscode.window.showTextDocument(doc).then(editor => {
-
-			}, err => {
-				console.error(err);
-			});
-		}, err => {
-			console.error(err);
-		});
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from test-switcher-vs!');
+		
 	});
 
 	context.subscriptions.push(disposable);
 }
+
+function searchFiles(dirToSearch, fileNameToSearch) {
+	const findResult = vscode.workspace.findFiles(dirToSearch + fileNameToSearch + '.js', '**​/node_modules/**', 100);
+	return findResult.then(uris => {
+		console.log(uris);
+		if (!uris) {
+			return;
+		}
+		uris.forEach(uri => {
+			console.log(uri.fsPath);
+			//self.matchingFiles.push(uri.fsPath);
+		});
+		
+	});
+}
+
+function test(fileToSwitch) {
+	var filePath = path.join(vscode.workspace.rootPath, fileToSwitch);
+	var openPath = vscode.Uri.file(filePath);
+	vscode.workspace.openTextDocument(openPath).then(doc => {
+		vscode.window.showTextDocument(doc).then(editor => {
+
+		}, err => {
+			console.error(err);
+		});
+	}, err => {
+		console.error(err);
+	});
+
+	// Display a message box to the user
+	vscode.window.showInformationMessage('Hello World from test-switcher-vs!');
+}
+
+
 exports.activate = activate;
 
 // this method is called when your extension is deactivated
