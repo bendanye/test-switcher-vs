@@ -31,29 +31,14 @@ function activate(context) {
 
 		//console.log(currentOpenFileName);
 
-		let fileToSwitch = null;
-
 		if (currentOpenFileName.startsWith("\\src\\")) {
 
 			let fileNameToSearch = currentOpenFileName.replace("\\src\\", '').replace('.js', '');
-			console.log(fileNameToSearch);
+			//console.log(fileNameToSearch);
 
 			fileNameToSearch = fileNameToSearch + '{,' + fileSuffixes.join(',') + '}';
 
 			searchFiles('**/test/', fileNameToSearch);
-			
-			const findResult = vscode.workspace.findFiles('**/test/' + fileNameToSearch + '{,' + fileSuffixes.join(',') + '}.js', '**​/node_modules/**', 100);
-			return findResult.then(uris => {
-				console.log(uris);
-				if (!uris) {
-					return;
-				}
-				uris.forEach(uri => {
-					console.log(uri.fsPath);
-					//self.matchingFiles.push(uri.fsPath);
-				});
-				
-			});
 		}
 
 		else {
@@ -63,7 +48,7 @@ function activate(context) {
 				fileNameToSearch = fileNameToSearch.replace(fileSuffixes[i], '');
 			}
 
-			console.log(fileNameToSearch);
+			//console.log(fileNameToSearch);
 			searchFiles('**/src/', fileNameToSearch);
 			
 		}
@@ -78,20 +63,18 @@ function searchFiles(dirToSearch, fileNameToSearch) {
 	const findResult = vscode.workspace.findFiles(dirToSearch + fileNameToSearch + '.js', '**​/node_modules/**', 100);
 	return findResult.then(uris => {
 		console.log(uris);
-		if (!uris) {
+		if (!uris || uris.length == 0) {
+			vscode.window.showWarningMessage('No file to switch...');
 			return;
 		}
-		uris.forEach(uri => {
-			console.log(uri.fsPath);
-			//self.matchingFiles.push(uri.fsPath);
-		});
 		
+		switchFile(uris[0]);
 	});
 }
 
-function test(fileToSwitch) {
-	var filePath = path.join(vscode.workspace.rootPath, fileToSwitch);
-	var openPath = vscode.Uri.file(filePath);
+function switchFile(fileToSwitch) {
+	console.log('switchFile: ' + fileToSwitch);
+	var openPath = fileToSwitch;
 	vscode.workspace.openTextDocument(openPath).then(doc => {
 		vscode.window.showTextDocument(doc).then(editor => {
 
@@ -103,7 +86,7 @@ function test(fileToSwitch) {
 	});
 
 	// Display a message box to the user
-	vscode.window.showInformationMessage('Hello World from test-switcher-vs!');
+	//vscode.window.showInformationMessage('Hello World from test-switcher-vs!');
 }
 
 
