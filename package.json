@@ -1,7 +1,7 @@
 {
 	"name": "test-switcher-vs",
-	"displayName": "test-switcher-vs",
-	"description": "switch to and from test",
+	"displayName": "Test Switcher",
+	"description": "Switch to and from test",
 	"publisher": "bendanye",
 	"version": "0.0.1",
 	"engines": {
@@ -11,20 +11,20 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:test-switcher-vs.helloWorld"
+		"onCommand:test-switcher-switch-code"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "test-switcher-vs.helloWorld",
-				"title": "Hello To Tests",
+				"command": "test-switcher-switch-code",
+				"title": "Switch to production/test code",
 				"category": "Tests"
 			}
 		],
 		"keybindings": [
 			{
-			  "command": "test-switcher-vs.helloWorld",
+			  "command": "test-switcher-switch-code",
 			  "key": "Ctrl+9",
 			  "mac": "Cmd+9",
 			  "when": "editorTextFocus"
@@ -34,10 +34,28 @@
 			"editor/context": [
 			  {
 				"when": "resourceLangId != markdown",
-				"command": "test-switcher-vs.helloWorld",
+				"command": "test-switcher-switch-code",
 				"group": "navigation"
 			  }
 			]
+		  },
+		  "configuration": {
+			"type": "object",
+			"title": "UnitTest Switcher Options",
+			"properties": {
+			  "test-switcher.test.suffix": {
+				"default": [
+				  ".unit.test",
+				  ".int.test",
+				  ".int.narrow.test",
+				  ".test"
+				],
+				"description": "Suffix rule of test (case sensitive)",
+				"type": [
+				  "array"
+				]
+			  }
+			}
 		  }
 	},
 	"scripts": {
