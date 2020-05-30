@@ -17,7 +17,7 @@ function activate(context) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('test-switcher-switch-code', function () {
+	let disposableSwitchCode = vscode.commands.registerCommand('test-switcher-switch-code', function () {
 		// The code you place here will be executed every time your command is executed
 
 		//console.log(vscode.window.activeTextEditor.document.uri.fsPath);
@@ -54,7 +54,12 @@ function activate(context) {
 		
 	});
 
-	context.subscriptions.push(disposable);
+	let disposableSwitchStorybook = vscode.commands.registerCommand('test-switcher-switch-story', function () {
+		vscode.window.showInformationMessage('Hello Storybook from test-switcher-vs!');
+	});
+
+	context.subscriptions.push(disposableSwitchCode);
+	context.subscriptions.push(disposableSwitchStorybook);
 }
 
 function searchFiles(dirToSearch, fileNameToSearch) {
