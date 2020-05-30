@@ -71,6 +71,15 @@
 				"type": [
 				  "array"
 				]
+			  },
+			  "test-switcher.story.suffix": {
+				"default": [
+				  ".stories"
+				],
+				"description": "Suffix rule of story (case sensitive)",
+				"type": [
+				  "array"
+				]
 			  }
 			}
 		  }

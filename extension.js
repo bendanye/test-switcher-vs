@@ -2,7 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 
-const { switchtest } = require('./switchtest');
+const { switchTest } = require('./switchtest');
+const { switchStory } = require('./switchstory');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -21,11 +22,11 @@ function activate(context) {
 	// The commandId parameter must match the command field in package.json
 	let disposableSwitchCode = vscode.commands.registerCommand('test-switcher-switch-code', function () {
 		// The code you place here will be executed every time your command is executed
-		switchtest(searchFiles);
+		switchTest(searchFiles);
 	});
 
 	let disposableSwitchStorybook = vscode.commands.registerCommand('test-switcher-switch-story', function () {
-		vscode.window.showInformationMessage('Hello Storybook from test-switcher-vs!');
+		switchStory(searchFiles);
 	});
 
 	context.subscriptions.push(disposableSwitchCode);
