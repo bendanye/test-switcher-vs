@@ -2,6 +2,9 @@
 
 This extension supports that switch the `test` / `production code`.
 
+## Package
+Run vsce package to create .vsix file
+
 ## Hommage
 
 It pays tribute to [Unittest Switcher](https://github.com/takas-ho/vscode-unittest-switcher).
