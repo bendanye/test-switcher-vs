@@ -2,6 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 
+const { switchtest } = require('./switchtest');
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -19,39 +21,7 @@ function activate(context) {
 	// The commandId parameter must match the command field in package.json
 	let disposableSwitchCode = vscode.commands.registerCommand('test-switcher-switch-code', function () {
 		// The code you place here will be executed every time your command is executed
-
-		//console.log(vscode.window.activeTextEditor.document.uri.fsPath);
-
-		const fileSuffixes = vscode.workspace.getConfiguration('test-switcher')
-			.get('test.suffix', ['.unit.test', '.int.test', '.int.narrow.test']);
-
-		const currentOpenFileName = vscode.window.activeTextEditor.document.uri.fsPath.replace(vscode.workspace.rootPath, '');
-
-		//console.log(currentOpenFileName);
-
-		if (currentOpenFileName.startsWith("\\src\\")) {
-
-			let fileNameToSearch = currentOpenFileName.replace("\\src\\", '').replace('.js', '');
-			//console.log(fileNameToSearch);
-
-			fileNameToSearch = fileNameToSearch + '{,' + fileSuffixes.join(',') + '}';
-
-			searchFiles('**/test/', fileNameToSearch);
-		}
-
-		else {
-
-			let fileNameToSearch = currentOpenFileName.replace("\\test\\", '').replace('.js', '');
-			for(let i in fileSuffixes) {
-				fileNameToSearch = fileNameToSearch.replace(fileSuffixes[i], '');
-			}
-
-			//console.log(fileNameToSearch);
-			searchFiles('**/src/', fileNameToSearch);
-			
-		}
-
-		
+		switchtest(searchFiles);
 	});
 
 	let disposableSwitchStorybook = vscode.commands.registerCommand('test-switcher-switch-story', function () {
