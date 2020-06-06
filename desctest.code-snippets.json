@@ -1,0 +1,15 @@
+{
+	"Jest Desc and Test": {
+		"prefix": "desctest",
+		"body": [
+		  "describe('${TM_FILEPATH}/${TM_FILENAME_BASE}', () => {",
+		  "    describe('Name of the group', () => {",
+		  "        test('should ', () => {",
+		  "            ",
+		  "        });",
+		  "    });",
+		  "});"
+		],
+		"description": "Jest Desc and Test"
+	  }
+}

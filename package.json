@@ -3,7 +3,7 @@
 	"displayName": "Test Switcher",
 	"description": "Switch to and from test/storybook",
 	"publisher": "bendanye",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
@@ -41,8 +41,8 @@
 				"mac": "Cmd+0",
 				"when": "editorTextFocus"
 			}
-		  ],
-		  "menus": {
+		],
+		"menus": {
 			"editor/context": [
 			  {
 				"when": "resourceLangId != markdown",
@@ -55,8 +55,8 @@
 				"group": "navigation"
 			  }
 			]
-		  },
-		  "configuration": {
+		},
+		"configuration": {
 			"type": "object",
 			"title": "UnitTest Switcher Options",
 			"properties": {
@@ -82,7 +82,13 @@
 				]
 			  }
 			}
-		  }
+		},
+		"snippets": [
+			{
+				"language": "javascript",
+				"path": "./desctest.code-snippets.json"
+			}
+		]
 	},
 	"scripts": {
 		"lint": "eslint .",
