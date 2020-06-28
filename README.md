@@ -3,7 +3,7 @@
 This extension supports switch to `test` / `production code`.
 
 ## Package
-Run vsce package to create .vsix file
+Run "vsce package" to create .vsix file
 
 ## Hommage
 

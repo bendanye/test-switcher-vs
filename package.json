@@ -3,7 +3,7 @@
 	"displayName": "Test Switcher",
 	"description": "Switch to and from test/storybook",
 	"publisher": "bendanye",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
@@ -44,43 +44,43 @@
 		],
 		"menus": {
 			"editor/context": [
-			  {
-				"when": "resourceLangId != markdown",
-				"command": "test-switcher-switch-code",
-				"group": "navigation"
-			  },
-			  {
-				"when": "resourceLangId != markdown",
-				"command": "test-switcher-switch-story",
-				"group": "navigation"
-			  }
+				{
+					"when": "resourceLangId != markdown",
+					"command": "test-switcher-switch-code",
+					"group": "navigation"
+				},
+				{
+					"when": "resourceLangId != markdown",
+					"command": "test-switcher-switch-story",
+					"group": "navigation"
+				}
 			]
 		},
 		"configuration": {
 			"type": "object",
 			"title": "UnitTest Switcher Options",
 			"properties": {
-			  "test-switcher.test.suffix": {
-				"default": [
-				  ".unit.test",
-				  ".int.test",
-				  ".int.narrow.test",
-				  ".test"
-				],
-				"description": "Suffix rule of test (case sensitive)",
-				"type": [
-				  "array"
-				]
-			  },
-			  "test-switcher.story.suffix": {
-				"default": [
-				  ".stories"
-				],
-				"description": "Suffix rule of story (case sensitive)",
-				"type": [
-				  "array"
-				]
-			  }
+				"test-switcher.test.suffix": {
+					"default": [
+						".unit.test",
+						".int.test",
+						".int.narrow.test",
+						".test"
+					],
+					"description": "Suffix rule of test (case sensitive)",
+					"type": [
+						"array"
+					]
+				},
+				"test-switcher.story.suffix": {
+					"default": [
+						".stories"
+					],
+					"description": "Suffix rule of story (case sensitive)",
+					"type": [
+						"array"
+					]
+				}
 			}
 		},
 		"snippets": [

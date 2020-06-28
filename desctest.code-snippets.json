@@ -2,7 +2,9 @@
 	"Jest Desc and Test": {
 		"prefix": "desctest",
 		"body": [
-		  "describe('${TM_FILEPATH}/${TM_FILENAME_BASE}', () => {",
+		  "const {} = require('${TM_FILEPATH}/${TM_FILENAME_BASE}')",
+		  "",	
+		  "describe('${TM_FILENAME_BASE}', () => {",
 		  "    describe('Name of the group', () => {",
 		  "        test('should ', () => {",
 		  "            ",
