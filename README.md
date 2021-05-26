@@ -1,6 +1,6 @@
 # Switch the test / production code.
 
-This extension supports switch to `test` / `production code`.
+A VSCode extension that supports switch to `test` / `production code`.
 
 ## Package
 Run "vsce package" to create .vsix file
